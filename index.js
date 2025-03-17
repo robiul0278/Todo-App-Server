@@ -18,9 +18,8 @@ const client = new MongoClient(uri, {
         strict: true,
         deprecationErrors: true,
     },
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
 });
+
 
 let taskCollection;
 
