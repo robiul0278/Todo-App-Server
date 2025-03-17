@@ -2,14 +2,15 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000;
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 // middleware
 app.use(cors());
 app.use(express.json());
 
 // mongoDB Local Credential
-const uri = `mongodb://localhost:27017`;
+// const uri = `mongodb://localhost:27017`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.02sbr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -59,7 +60,7 @@ async function main() {
 
         app.delete('/task/:id', async (req, res) => {
             const id = req.params.id;
-            const result = await taskCollection.deleteOne({ _id: ObjectId(id) });
+            const result = await taskCollection.deleteOne({ _id: new ObjectId(id) });
             // console.log(result);
             res.send(result);
         });
@@ -67,9 +68,10 @@ async function main() {
         // status update
         app.put('/task/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id);
+            // console.log(id);
             const task = req.body;
-            const filter = { _id: ObjectId(id) };
+            // console.log(req.body);
+            const filter = { _id: new ObjectId(id) };
             const updateDoc = {
                 $set: {
                     isCompleted: task.isCompleted,
