@@ -11,8 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const uri = `mongodb+srv://Todo-Server:SMk7qshTqdF8uEQ0@cluster0.02sbr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.02sbr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.02sbr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
