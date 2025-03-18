@@ -7,7 +7,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-    origin: 'https://add-your-todo-today.netlify.app', // Change this to your frontend URL instead of '*'
+    origin: '*', // Change this to your frontend URL instead of '*'
+
+    // origin: 'https://add-your-todo-today.netlify.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
 };
@@ -33,7 +35,7 @@ let taskCollection;
 
 async function connectDB() {
     try {
-        await client.connect();
+        client.connect();
         const db = client.db('Todo');
         taskCollection = db.collection('tasks');
         console.log("✅ Successfully connected to MongoDB!");
