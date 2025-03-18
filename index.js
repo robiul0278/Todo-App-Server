@@ -6,8 +6,16 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 5000;
 
+const corsOptions = {
+    origin: 'https://add-your-todo-today.netlify.app', // Change this to your frontend URL instead of '*'
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+};
+
+app.use(cors(corsOptions));
+
 // Middleware
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
