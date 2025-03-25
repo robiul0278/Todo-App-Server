@@ -55,7 +55,12 @@ app.get('/', (req, res) => {
 app.get('/tasks', async (req, res) => {
     try {
         const query = req.query.priority ? { priority: req.query.priority } : {};
-        const tasks = await taskCollection.find(query).toArray();
+        const sortCriteria = { isCompleted: 1 };
+
+        const tasks = await taskCollection
+        .find(query)
+        .sort(sortCriteria)
+        .toArray();
         res.send({ status: true, data: tasks });
     } catch (error) {
         res.status(500).send({ status: false, message: "Error fetching tasks", error });
